@@ -1,0 +1,10 @@
+# Ignore C++ compiled binaries (Linux)
+**/*.out
+**/*.o
+**/*.obj
+**/*.so
+**/*.a
+**/*.gch
+**/bin/
+**/build/
+**/dist/
