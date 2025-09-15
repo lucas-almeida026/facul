@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <limits>
 
 using namespace std;
 
@@ -103,18 +102,26 @@ uint getChoiceSync(const vector<string>& options, const string& prompt, const st
 	printf("\n");
 	printOptions(options);
 	cout << prompt << "(1-" << options.size() << "): ";
+	
 	uint choice = 0;
-	cin >> choice;
-	while (choice == 0 || choice > options.size()) {
-		if (cin.fail()) {
+	string input;
+	
+	while (true) {
+		cin >> input;
+		try {
+			choice = stoi(input);
+			if (choice >= 1 && choice <= options.size()) {
+				break;
+			} else {
+				cout << "Opção inválida. Tente novamente: ";
+			}
+		} catch (...) {
 			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			while (cin.get() != '\n') {}
 			cout << "Entrada inválida. Por favor, insira um número: ";
-		} else {
-			cout << "Opção inválida. Tente novamente: ";
 		}
-		cin >> choice;
 	}
+	
 	return choice;
 }
 
